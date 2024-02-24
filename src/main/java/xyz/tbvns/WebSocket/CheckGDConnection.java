@@ -1,19 +1,22 @@
-package xyz.tbvns;
+package xyz.tbvns.WebSocket;
+
+import xyz.tbvns.Constant;
 
 import java.net.URI;
+import java.util.TimerTask;
 
-public class CheckGDConnection implements Runnable{
+public class CheckGDConnection implements Runnable {
     @Override
     public void run() {
         while (true) {
             try {
-                if (Constant.HasGD && Constant.HasOBJ && Constant.HasANM) {
+                if (Constant.HasGD && Constant.HasOBJ) {
                     Constant.isReady = true;
                 } else {
                     Constant.isReady = false;
                 }
 
-                WSClient client = new WSClient(URI.create("ws://127.0.0.1:1313"));
+                WSGDChecker client = new WSGDChecker(URI.create("ws://127.0.0.1:1313"));
                 client.run();
                 Thread.sleep(1000);
                 client.close();
@@ -22,7 +25,6 @@ public class CheckGDConnection implements Runnable{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

@@ -1,18 +1,23 @@
-package xyz.tbvns;
+package xyz.tbvns.WebSocket;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import xyz.tbvns.Constant;
+import xyz.tbvns.Main;
 
 import java.net.URI;
 
-public class WSClient extends WebSocketClient {
-    public WSClient(URI serverUri) {
+public class WSGDChecker extends WebSocketClient {
+    public WSGDChecker(URI serverUri) {
         super(serverUri);
     }
 
     @Override
     public void onOpen(ServerHandshake serverHandshake) {
-        Constant.HasGD = true;
+        if (!Constant.HasGD) {
+            Constant.HasGD = true;
+            Main.Refresh();
+        }
         close();
     }
 
@@ -28,6 +33,9 @@ public class WSClient extends WebSocketClient {
 
     @Override
     public void onError(Exception e) {
-        Constant.HasGD = false;
+        if (Constant.HasGD) {
+            Constant.HasGD = false;
+            Main.Refresh();
+        }
     }
 }
