@@ -5,10 +5,10 @@ It generate gradient trigger to create the illusion of 3d object in geometry das
 ## What it will do:
 Use animation with a list of OBJ and MTL file.
 Read custom camera path from the blender's exporter to python script.
+Custom color (Waiting for WSLiveEditor to add this feature)
 
 ## What it don't/won't do:
 Custom texture other than solid color, Light emission and calculation.
-Custom color (Waiting for WSLiveEditor to add this feature)
 
 ## How to use:
 ### Geode:
