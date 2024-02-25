@@ -1,6 +1,7 @@
 package xyz.tbvns.Generate;
 
-import xyz.tbvns.Object.CompletedFace;
+import xyz.tbvns.Constant;
+import xyz.tbvns.Object.Color;
 import xyz.tbvns.Object.Face;
 import xyz.tbvns.Object.Vector3;
 
@@ -9,7 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ReadOBJ {
     public ArrayList<Vector3> getPoints(File OBJFile) throws FileNotFoundException {
@@ -32,7 +34,21 @@ public class ReadOBJ {
     public ArrayList<Face> getFace(File OBJFile) throws FileNotFoundException {
         BufferedReader reader = new BufferedReader(new FileReader(OBJFile));
         ArrayList<Face> Faces = new ArrayList<>();
+        AtomicReference<HashMap<String, Color>> materials = new AtomicReference<>(new HashMap<>());
+        AtomicReference<Color> color = new AtomicReference<>(new Color(0, 0, 0));
         reader.lines().forEach(l -> {
+            if (Constant.HasMTL) {
+                try {
+                    materials.set(ReadMTL.getColors(Constant.MTL));
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (Constant.HasMTL) {
+                if (l.startsWith("usemtl")) {
+                    color.set(materials.get().get(l.split(" ")[1]));
+                }
+            }
             if (l.startsWith("f")) {
                 Face face = new Face();
                 String substring = l.substring(2);
@@ -42,6 +58,9 @@ public class ReadOBJ {
                         String id = cord[i].split("/")[0];
                         face.points.add(Integer.valueOf(id));
                     }
+                    if (Constant.HasMTL) {
+                        face.color = color.get();
+                    }
                     Faces.add(face);
                 } else if (cord.length == 4) {
                     for (int i = 0; i < cord.length; i++) {
@@ -49,6 +68,11 @@ public class ReadOBJ {
                         face.points.add(Integer.valueOf(id));
                     }
                     face.Has4Point = true;
+
+                    if (Constant.HasMTL) {
+                        face.color = color.get();
+                    }
+
                     Faces.add(face);
                 } else {
                     System.err.println("A face had more than 4 point, ignoring it");
@@ -56,23 +80,5 @@ public class ReadOBJ {
             }
         });
         return Faces;
-    }
-
-    public List<CompletedFace> getCompletedFaces(File OBJFile) throws FileNotFoundException {
-        List<Vector3> point = getPoints(OBJFile);
-        List<Face> faces = getFace(OBJFile);
-
-        List<CompletedFace> completedFaces = new ArrayList<>();
-
-        faces.forEach(f -> {
-            CompletedFace face = new CompletedFace();
-            face.Has4Point = f.Has4Point;
-            f.points.forEach(p -> {
-                face.points.add(point.get(p-1));
-            });
-            completedFaces.add(face);
-        });
-
-        return completedFaces;
     }
 }

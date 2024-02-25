@@ -12,19 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    private int xScreenCenter = 320/2;
-    private int yScreenCenter = 240/2;
-    private Vector3d screenPosition = new Vector3d( 0, 0, 20 );
-    private Vector3d viewAngle = new Vector3d( 180, 180, 90);
+    public static int xScreenCenter = 320/2;
+    public static int yScreenCenter = 240/2;
+    public static Vector3d screenPosition = new Vector3d( 0, 0, 20 );
+    public static Vector3d viewAngle = new Vector3d( 180, 180, 90);
     private static final double DEG_TO_RAD = 0.017453292;
-    private double modelScale = 20;
+    public static double modelScale = 20;
 
     double CT = Math.cos( DEG_TO_RAD * viewAngle.x );
     double ST = Math.sin( DEG_TO_RAD * viewAngle.x );
     double CP = Math.cos( DEG_TO_RAD * viewAngle.y );
     double SP = Math.sin( DEG_TO_RAD * viewAngle.y );
 
-    public void projectPoint(Point3d input, Point3d output )
+    public void projectPoint(Point3d input, Point3d output)
     {
         double x = screenPosition.x + input.x * CT - input.y * ST;
         double y = screenPosition.y + input.x * ST * SP + input.y * CT * SP

@@ -2,16 +2,24 @@ package xyz.tbvns.Generate;
 
 import xyz.tbvns.Constant;
 import xyz.tbvns.GeometryDash.GDObject;
+import xyz.tbvns.Object.Color;
 import xyz.tbvns.Object.Face;
 import xyz.tbvns.Object.Vector3;
 import xyz.tbvns.Utils;
 
 import javax.vecmath.Point3d;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
 
 public class Generate3D {
     public void Generate() throws FileNotFoundException, InterruptedException {
+        HashMap<String, Color> materials;
+
+        if (Constant.HasMTL) {
+            materials = ReadMTL.getColors(Constant.MTL);
+        }
+
         List<Vector3> points = new ReadOBJ().getPoints(Constant.OBJ);
         Constant.points3d = points;
         for (int i = 0; i < points.size(); i++) {
