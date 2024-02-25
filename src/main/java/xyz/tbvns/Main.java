@@ -4,6 +4,7 @@ import xyz.tbvns.Generate.Generate3D;
 import xyz.tbvns.Swing.Camera;
 import xyz.tbvns.WebSocket.CheckGDConnection;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -12,11 +13,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Objects;
 
 public class Main {
 
     public static JFrame jFrame;
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         JFrame frame = new JFrame("GD3D");
 
         jFrame = frame;
@@ -24,6 +26,7 @@ public class Main {
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
         frame.setSize(530, 290);
         frame.setResizable(false);
+        frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.jpg"))));
 
         JMenuBar bar = new JMenuBar();
         bar.add(HelpMenu());
