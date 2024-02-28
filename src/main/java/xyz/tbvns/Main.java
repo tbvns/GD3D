@@ -301,7 +301,11 @@ public class Main {
                 }
                 if (Constant.isReady) {
                     try {
-                        new Generate3D().Generate();
+                        if (!Constant.UseAnimation) {
+                            new Generate3D().Generate();
+                        } else {
+                            new Generate3D().GenerateAnim();
+                        }
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
@@ -311,7 +315,6 @@ public class Main {
                             "Some element are missing\nRequired element: \n  - OBJ file\n -  WSLiveEditor mod\n  - GD open in the editor",
                             "Error !",
                             JOptionPane.ERROR_MESSAGE);
-
                 }
             }
         });

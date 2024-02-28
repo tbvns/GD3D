@@ -9,4 +9,15 @@ public class Color {
     public float red = 0;
     public float green = 0;
     public float blue = 0;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof  Color) {
+            Color color = (Color) obj;
+            if (this.blue == color.blue && this.red == color.red && this.green == color.green) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -1,10 +1,9 @@
 package xyz.tbvns.Object;
 
+import java.io.File;
+import java.util.List;
+
 public class Frame {
-    public float moveX;
-    public float moveY;
-    public float moveZ;
-    public float rotateX;
-    public float rotateY;
-    public float rotateZ;
+    public File OBJ;
+    public File MTL;
 }
