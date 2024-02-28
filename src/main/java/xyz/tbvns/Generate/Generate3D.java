@@ -61,11 +61,13 @@ public class Generate3D {
             GDObject.addColor(0f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i+1);
         }
 
+        GDObject.send();
+
         Constant.points3d = new ArrayList<>();
         Constant.faces = new ArrayList<>();
         Constant.points = new ArrayList<>();
-
-        GDObject.send();
+        GDObject.request = new ArrayList<>();
+        GDObject.keyframes = new HashMap<>();
     }
 
     public void GenerateAnim() throws FileNotFoundException {
@@ -74,14 +76,14 @@ public class Generate3D {
 
         for (int i = 0; i < Constant.OBJ.listFiles().length; i++) {
             File f = Constant.OBJ.listFiles()[i];
-            if (f.getAbsolutePath().contains(".obj")) {
+            if (f.getAbsolutePath().endsWith(".obj")) {
                 OBJs.add(f);
             }
         }
 
         for (int i = 0; i < Constant.MTL.listFiles().length; i++) {
             File f = Constant.MTL.listFiles()[i];
-            if (f.getAbsolutePath().contains(".mtl")) {
+            if (f.getAbsolutePath().endsWith(".mtl")) {
                 MTLs.add(f);
             }
         }
@@ -103,7 +105,13 @@ public class Generate3D {
 
                     Constant.points.add(new Vector3((float) p2.x, (float) p2.y, (float) p2.z));
 
-                    GDObject.addBasic(725, (float) (p2.x + 1000), (float) (p2.y + 1000), i2+1);
+                    if (i == 0) {
+                        GDObject.addBasic(725, (float) (p2.x + 1000), (float) (p2.y + 1000), i2+1);
+                        GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1);
+                        System.out.println(i2);
+                    } else {
+                        GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1);
+                    }
                 }
 
                 List<Face> faces = new ReadOBJ().getFaceAnimation(OBJs.get(i), MTLs.get(i));
@@ -133,12 +141,17 @@ public class Generate3D {
                     GDObject.addColor(i*10f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i2+1);
                 }
 
+                GDObject.flushKeyFrame();
+
                 Constant.points3d = new ArrayList<>();
                 Constant.faces = new ArrayList<>();
                 Constant.points = new ArrayList<>();
-
-                GDObject.send();
             }
+
+            GDObject.send();
+
+            GDObject.request = new ArrayList<>();
+            GDObject.keyframes = new HashMap<>();
         }
     }
 }

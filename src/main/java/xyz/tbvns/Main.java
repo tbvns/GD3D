@@ -20,11 +20,15 @@ public class Main {
     public static JFrame jFrame;
     public static void main(String[] args) throws InterruptedException, IOException {
         JFrame frame = new JFrame("GD3D");
-
         jFrame = frame;
-
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        frame.setSize(530, 290);
+
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            frame.setSize(540, 290);
+        } else {
+            frame.setSize(530, 290);
+        }
+
         frame.setResizable(false);
         frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.jpg"))));
 

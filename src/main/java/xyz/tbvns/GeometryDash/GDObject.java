@@ -4,6 +4,8 @@ import xyz.tbvns.WebSocket.WSClient;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class GDObject {
     public static ArrayList<String> request = new ArrayList<>();
@@ -60,6 +62,28 @@ public class GDObject {
                         "  \"objects\": \"1,221,2," + posX + ",3," + posY + ",7," + r + ",8," + g + ",9," + b + ",23," + targetColor + "\"\n" +
                         "}";
         request.add(JSON);
+    }
+
+    public static HashMap<Integer, String> keyframes = new HashMap<>();
+    public static void addKeyframe(Float posX, Float posY, int groupeID, int curve) {
+        String obj = "1,3032,2," + posX + ",3," + posY + ",51," + groupeID +  ",378, " + curve;
+        if (keyframes.containsKey(groupeID)) {
+            keyframes.put(groupeID, keyframes.get(groupeID) + ";" + obj);
+        } else {
+            keyframes.put(groupeID, obj);
+        }
+    }
+
+    public static void flushKeyFrame() {
+        keyframes.forEach((i, f) -> {
+            System.out.println(f);
+            String JSON =
+                    "{\n" +
+                            "  \"action\": \"ADD\",\n" +
+                            "  \"objects\": \" "  + f + "\"\n" +
+                    "}";
+            request.add(JSON);
+        });
     }
 
     public static void send() {
