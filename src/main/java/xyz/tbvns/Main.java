@@ -29,6 +29,8 @@ public class Main {
             frame.setSize(530, 290);
         }
 
+        frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-frame.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-frame.getSize().height/2);
+
         frame.setResizable(false);
         frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.jpg"))));
 
@@ -224,6 +226,10 @@ public class Main {
 
         JCheckBox FollowPlayer = new JCheckBox("Follow player", Constant.FollowPlayer);
         JCheckBox UseColor = new JCheckBox("Use color", Constant.UseColor);
+        JCheckBox UseKeyframe = new JCheckBox("Keyframe", Constant.UseKeyframe);
+        //TODO: add fps for animation
+        //TODO: add way to make frame move instantly (no interpolation)
+        //TODO: add speed multiplier for movement change in gd (purple speed, red speed ...)
 
         FollowPlayer.addActionListener(new ActionListener() {
             @Override
@@ -239,9 +245,18 @@ public class Main {
             }
         });
 
+        UseKeyframe.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Constant.UseKeyframe = !Constant.UseKeyframe;
+            }
+        });
+
+
         jPanel.setBorder(BorderFactory.createTitledBorder("Settings"));
         jPanel.add(FollowPlayer);
         jPanel.add(UseColor);
+        jPanel.add(UseKeyframe);
 
         return jPanel;
     }
@@ -308,7 +323,11 @@ public class Main {
                         if (!Constant.UseAnimation) {
                             new Generate3D().Generate();
                         } else {
-                            new Generate3D().GenerateAnim();
+                            if (Constant.UseKeyframe) {
+                                new Generate3D().GenerateAnimKeyframe();
+                            } else {
+                                new Generate3D().GenerateAnimMove();
+                            }
                         }
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);

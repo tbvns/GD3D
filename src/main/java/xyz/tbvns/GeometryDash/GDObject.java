@@ -5,7 +5,6 @@ import xyz.tbvns.WebSocket.WSClient;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GDObject {
     public static ArrayList<String> request = new ArrayList<>();
@@ -46,6 +45,15 @@ public class GDObject {
         request.add(JSON);
     }
 
+    public static void addKeyframeTrigger() {
+        String JSON =
+                "{\n" +
+                        "  \"action\": \"ADD\",\n" +
+                        "  \"objects\": \"1," + 3033 + ",2," + 0 + ",3," + 150 + ",76," + 9999 + ",520," + 1 + ",521," + 1 + ",545," + 1 + ",522," + 1 + ",523," + 1 + ",546," + 1 + "\"\n" +
+                        "}";
+        request.add(JSON);
+    }
+
     public static void addGradient(Float posX, Float posY, Integer groupe, int p1, int p2 ,int p3, int p4, int id, int zorder, int colorID) {
         String JSON =
                 "{\n" +
@@ -64,26 +72,13 @@ public class GDObject {
         request.add(JSON);
     }
 
-    public static HashMap<Integer, String> keyframes = new HashMap<>();
-    public static void addKeyframe(Float posX, Float posY, int groupeID, int curve) {
-        String obj = "1,3032,2," + posX + ",3," + posY + ",51," + groupeID +  ",378, " + curve;
-        if (keyframes.containsKey(groupeID)) {
-            keyframes.put(groupeID, keyframes.get(groupeID) + ";" + obj);
-        } else {
-            keyframes.put(groupeID, obj);
-        }
-    }
-
-    public static void flushKeyFrame() {
-        keyframes.forEach((i, f) -> {
-            System.out.println(f);
-            String JSON =
-                    "{\n" +
-                            "  \"action\": \"ADD\",\n" +
-                            "  \"objects\": \" "  + f + "\"\n" +
-                    "}";
-            request.add(JSON);
-        });
+    public static void addKeyframe(Float posX, Float posY, int groupeID, int curve, int order) {
+        String JSON =
+                   "{\n" +
+                   "  \"action\": \"ADD\",\n" +
+                   "  \"objects\": \"1,3032,2," + posX + ",3," + posY + ",51," + groupeID + ",373," + groupeID + ",57," + 9999 + ",378, " + curve + ",374," + order + ",10," + 0.0416666 + "\"\n" +
+                   "}";
+        request.add(JSON);
     }
 
     public static void send() {

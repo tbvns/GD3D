@@ -37,3 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /imgui.ini
+!/src/main/resources/Random.txt
