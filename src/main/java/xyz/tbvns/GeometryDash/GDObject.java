@@ -67,7 +67,7 @@ public class GDObject {
         String JSON =
                 "{\n" +
                         "  \"action\": \"ADD\",\n" +
-                        "  \"objects\": \"1,221,2," + posX + ",3," + posY + ",7," + r + ",8," + g + ",9," + b + ",23," + targetColor + "\"\n" +
+                        "  \"objects\": \"1,899,2," + posX + ",3," + posY + ",7," + r + ",8," + g + ",9," + b + ",23," + targetColor + "\"\n" +
                         "}";
         request.add(JSON);
     }

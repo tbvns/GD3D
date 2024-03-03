@@ -1,6 +1,6 @@
 Player speed in blocks per second.
 Half speed: 8.4
-Normal speed: 10.41667
+Normal speed: 10.41667   ->   0.43402791666 /frame 24 fps
 Double speed: 12.91667
 Triple speed: 15.667
 Quadruple speed: 19.2

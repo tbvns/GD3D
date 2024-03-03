@@ -84,4 +84,13 @@ public class Utils {
         }
         return facez;
     }
+
+    public static float getZ(Face face) {
+        if (face.Has4Point) {
+            System.out.println(Constant.points3d.get(face.points.get(0) - 1).z + " " + Constant.points3d.get(face.points.get(1) - 1).z + " " + Constant.points3d.get(face.points.get(2) - 1).z + Constant.points3d.get(face.points.get(3) - 1).z + " - " + (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1) - 1).z + Constant.points3d.get(face.points.get(2) - 1).z + Constant.points3d.get(face.points.get(3) - 1).z) / 4);
+            return (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1)  - 1).z + Constant.points3d.get(face.points.get(2) - 1).z + Constant.points3d.get(face.points.get(3) - 1).z) / 4;
+        } else {
+            return (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1) - 1).z + Constant.points3d.get(face.points.get(2) - 1).z) / 3;
+        }
+    }
 }

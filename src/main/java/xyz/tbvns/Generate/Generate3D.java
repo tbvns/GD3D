@@ -106,10 +106,8 @@ public class Generate3D {
                     if (i == 0) {
                         GDObject.addBasic(725, (float) (p2.x + 1000), (float) (p2.y + 1000), i2+1);
                         GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i);
-                        System.out.println(i2 + "    " + i);
                     } else {
                         GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i);
-                        System.out.println(i2 + "    " + i);
                     }
                 }
 
@@ -119,18 +117,19 @@ public class Generate3D {
 
                 Constant.faces = faces;
                 final int[] id = {0};
+                AtomicInteger temp = new AtomicInteger(i);
+
                 faces.forEach(f -> {
                     if (!colors.contains(f.color)) {
                         f.colorId = colors.size() + 1;
                         colors.add(f.color);
-                        System.out.println(f.colorId);
                     }
 
                     id[0] +=1;
                     if (f.points.size() == 3) {
-                        GDObject.addGradient(0f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], Math.round(Constant.points3d.get(f.points.get(0) - 1).z * 10000), f.colorId);
+                        GDObject.addGradient((float) (temp.get()*0.43402791666*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
                     } else {
-                        GDObject.addGradient(0f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], Math.round(Constant.points3d.get(f.points.get(0) - 1).z * 10000), f.colorId);
+                        GDObject.addGradient((float) (temp.get()*0.43402791666*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
                     }
                 });
 
@@ -138,6 +137,7 @@ public class Generate3D {
                 for (int i2 = 0; i2 < colors.size(); i2++) {
                     Color c = colors.get(i2);
                     GDObject.addColor(i*10f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i2+1);
+                    System.out.println(i2+1);
                 }
 
                 Constant.points3d = new ArrayList<>();
@@ -222,9 +222,9 @@ public class Generate3D {
 
                     id[0] +=1;
                     if (f.points.size() == 3) {
-                        GDObject.addGradient(temp.get()*10f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], Math.round(Constant.points3d.get(f.points.get(0) - 1).z * 10000), f.colorId);
+                        GDObject.addGradient(temp.get()*10f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], Math.round(Utils.getZ(f) * 10000), f.colorId);
                     } else {
-                        GDObject.addGradient(temp.get()*10f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], Math.round(Constant.points3d.get(f.points.get(0) - 1).z * 10000), f.colorId);
+                        GDObject.addGradient(temp.get()*10f, 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], Math.round(Utils.getZ(f) * 10000), f.colorId);
                     }
                 });
 
