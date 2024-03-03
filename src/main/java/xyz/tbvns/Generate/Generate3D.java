@@ -42,7 +42,6 @@ public class Generate3D {
             if (!colors.contains(f.color)) {
                 f.colorId = colors.size() + 1;
                 colors.add(f.color);
-                System.out.println(f.colorId);
             }
 
             id[0] +=1;
@@ -137,7 +136,6 @@ public class Generate3D {
                 for (int i2 = 0; i2 < colors.size(); i2++) {
                     Color c = colors.get(i2);
                     GDObject.addColor(i*10f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i2+1);
-                    System.out.println(i2+1);
                 }
 
                 Constant.points3d = new ArrayList<>();
@@ -196,10 +194,6 @@ public class Generate3D {
                         new Utils().projectPoint(p1old, p2old);
 
                         GDObject.addMove(i*10f, i2+1, (float) (p2old.x - p2.x), (float) (p2old.y - p2.y), 0f);
-
-                        System.out.println((float) (p2old.x - p2.x) + "    " + (float) (p2old.y - p2.y));
-                        System.out.println((float) (p2old.x) + "    " + (float) (p2old.y));
-                        System.out.println((float) (p2.x) + "    " + (float) (p2.y));
                     }
                 }
 
@@ -217,7 +211,6 @@ public class Generate3D {
                     if (!colors.contains(f.color)) {
                         f.colorId = colors.size() + 1;
                         colors.add(f.color);
-                        System.out.println(f.colorId);
                     }
 
                     id[0] +=1;
