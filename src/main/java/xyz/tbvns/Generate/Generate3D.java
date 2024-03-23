@@ -89,58 +89,71 @@ public class Generate3D {
                 return;
             }
             GDObject.addKeyframeTrigger();
+            int counter = 0;
+            boolean first = true;
             for (int i = 0; i < OBJs.size(); i++) {
-                List<Vector3> points = new ReadOBJ().getPoints(OBJs.get(i));
-                Constant.points3d = points;
-                for (int i2 = 0; i2 < points.size(); i2++) {
-                    Vector3 p = points.get(i2);
+                try {
+                    if (counter >= Constant.SkipFrame || first) {
+                        counter = 0;
 
-                    Point3d p1 = new Point3d(new double[]{p.x, p.z, p.y});
-                    Point3d p2 = new Point3d(new double[]{0, 0, 0});
+                        List<Vector3> points = new ReadOBJ().getPoints(OBJs.get(i));
+                        Constant.points3d = points;
+                        for (int i2 = 0; i2 < points.size(); i2++) {
+                            Vector3 p = points.get(i2);
 
-                    new Utils().projectPoint(p1, p2);
+                            Point3d p1 = new Point3d(new double[]{p.x, p.z, p.y});
+                            Point3d p2 = new Point3d(new double[]{0, 0, 0});
 
-                    Constant.points.add(new Vector3((float) p2.x, (float) p2.y, (float) p2.z));
+                            new Utils().projectPoint(p1, p2);
 
-                    if (i == 0) {
-                        GDObject.addBasic(725, (float) (p2.x + 1000), (float) (p2.y + 1000), i2+1);
-                        GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i);
+                            Constant.points.add(new Vector3((float) p2.x, (float) p2.y, (float) p2.z));
+
+                            if (i == 0) {
+                                GDObject.addBasic(725, (float) (p2.x + 1000), (float) (p2.y + 1000), i2+1);
+                                GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i, 1/Constant.FPS*(Constant.SkipFrame+1));
+                            } else {
+                                GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i, 1/Constant.FPS*(Constant.SkipFrame+1));
+                            }
+                        }
+
+                        List<Face> faces = new ReadOBJ().getFaceAnimation(OBJs.get(i), MTLs.get(i));
+
+                        List<Color> colors = new ArrayList<>();
+
+                        Constant.faces = faces;
+                        final int[] id = {0};
+                        AtomicInteger temp = new AtomicInteger(i);
+
+                        faces.forEach(f -> {
+                            if (!colors.contains(f.color)) {
+                                f.colorId = colors.size() + 1;
+                                colors.add(f.color);
+                            }
+
+                            id[0] +=1;
+                            if (f.points.size() == 3) {
+                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
+                            } else {
+                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
+                            }
+                        });
+
+
+                        for (int i2 = 0; i2 < colors.size(); i2++) {
+                            Color c = colors.get(i2);
+                            GDObject.addColor(i*10f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i2+1);
+                        }
+
+                        Constant.points3d = new ArrayList<>();
+                        Constant.faces = new ArrayList<>();
+                        Constant.points = new ArrayList<>();
                     } else {
-                        GDObject.addKeyframe((float) (p2.x + 1000), (float) (p2.y + 1000), i2+1, 1, i);
+                        counter+=1;
                     }
+                    first = false;
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                List<Face> faces = new ReadOBJ().getFaceAnimation(OBJs.get(i), MTLs.get(i));
-
-                List<Color> colors = new ArrayList<>();
-
-                Constant.faces = faces;
-                final int[] id = {0};
-                AtomicInteger temp = new AtomicInteger(i);
-
-                faces.forEach(f -> {
-                    if (!colors.contains(f.color)) {
-                        f.colorId = colors.size() + 1;
-                        colors.add(f.color);
-                    }
-
-                    id[0] +=1;
-                    if (f.points.size() == 3) {
-                        GDObject.addGradient((float) (temp.get()*0.43402791666*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
-                    } else {
-                        GDObject.addGradient((float) (temp.get()*0.43402791666*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
-                    }
-                });
-
-
-                for (int i2 = 0; i2 < colors.size(); i2++) {
-                    Color c = colors.get(i2);
-                    GDObject.addColor(i*10f, 200f, Math.round(c.red * 255), Math.round(c.green * 255), Math.round(c.blue * 255), i2+1);
-                }
-
-                Constant.points3d = new ArrayList<>();
-                Constant.faces = new ArrayList<>();
-                Constant.points = new ArrayList<>();
             }
 
             GDObject.send();

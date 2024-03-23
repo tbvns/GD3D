@@ -1,10 +1,10 @@
 package xyz.tbvns.GeometryDash;
 
+import xyz.tbvns.Constant;
 import xyz.tbvns.WebSocket.WSClient;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GDObject {
     public static ArrayList<String> request = new ArrayList<>();
@@ -72,16 +72,21 @@ public class GDObject {
         request.add(JSON);
     }
 
-    public static void addKeyframe(Float posX, Float posY, int groupeID, int curve, int order) {
+    public static void addKeyframe(Float posX, Float posY, int groupeID, int curve, int order, float duration) {
         String JSON =
                    "{\n" +
                    "  \"action\": \"ADD\",\n" +
-                   "  \"objects\": \"1,3032,2," + posX + ",3," + posY + ",51," + groupeID + ",373," + groupeID + ",57," + 9999 + ",378, " + curve + ",374," + order + ",10," + 0.0416666 + "\"\n" +
+                   "  \"objects\": \"1,3032,2," + posX + ",3," + posY + ",51," + groupeID + ",373," + groupeID + ",57," + 9999 + ",378, " + curve + ",374," + order + ",10," + duration + "\"\n" +
                    "}";
         request.add(JSON);
     }
 
     public static void send() {
         new WSClient(URI.create("ws://127.0.0.1:1313"), request).run();
+        try {
+            Thread.sleep(0, Constant.PlaceDelay);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

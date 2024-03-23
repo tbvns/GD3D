@@ -2,6 +2,7 @@ package xyz.tbvns;
 
 import xyz.tbvns.Generate.Generate3D;
 import xyz.tbvns.Swing.Camera;
+import xyz.tbvns.Swing.Misc;
 import xyz.tbvns.WebSocket.CheckGDConnection;
 
 import javax.imageio.ImageIO;
@@ -24,9 +25,9 @@ public class Main {
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-            frame.setSize(540, 290);
+            frame.setSize(540, 425);
         } else {
-            frame.setSize(530, 290);
+            frame.setSize(530, 425);
         }
 
         frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-frame.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-frame.getSize().height/2);
@@ -227,9 +228,6 @@ public class Main {
         JCheckBox FollowPlayer = new JCheckBox("Follow player", Constant.FollowPlayer);
         JCheckBox UseColor = new JCheckBox("Use color", Constant.UseColor);
         JCheckBox UseKeyframe = new JCheckBox("Keyframe", Constant.UseKeyframe);
-        //TODO: add fps for animation
-        //TODO: add way to make frame move instantly (no interpolation)
-        //TODO: add speed multiplier for movement change in gd (purple speed, red speed ...)
 
         FollowPlayer.addActionListener(new ActionListener() {
             @Override
@@ -318,6 +316,20 @@ public class Main {
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+
+                try {
+                    Constant.FPS = Float.parseFloat(Misc.FPS.getText());
+                    Constant.SkipFrame = Integer.parseInt(Misc.FrameSkip.getText());
+                    Constant.StartingGroup = Integer.parseInt(Misc.StartingGroup.getText());
+                    Constant.PlaceDelay = Integer.parseInt(Misc.Delay.getText());
+                } catch (Exception ex) {
+                    JFrame frame = new JFrame("Error:");
+                    JOptionPane.showMessageDialog(frame,
+                            "Misc numbers are wrong: \n" + ex.getMessage(),
+                            "Error !",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (Constant.isReady) {
                     try {
                         if (!Constant.UseAnimation) {
@@ -355,6 +367,7 @@ public class Main {
         jFrame.add(Status());
         jFrame.add(Action());
         jFrame.add(Camera.getCamera());
+        jFrame.add(Misc.getMisc());
 
         jFrame.revalidate();
         jFrame.repaint();
