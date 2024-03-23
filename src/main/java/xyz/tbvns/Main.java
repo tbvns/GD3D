@@ -33,7 +33,7 @@ public class Main {
         frame.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-frame.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-frame.getSize().height/2);
 
         frame.setResizable(false);
-        frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.jpg"))));
+        frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.png"))));
 
         JMenuBar bar = new JMenuBar();
         bar.add(HelpMenu());
