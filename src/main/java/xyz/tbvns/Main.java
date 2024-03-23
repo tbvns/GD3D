@@ -46,10 +46,7 @@ public class Main {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        while (true) {
-            new Thread(new CheckGDConnection()).start();
-            Thread.sleep(200);
-        }
+        new Thread(new CheckGDConnection()).start();
     }
 
     public static JMenu HelpMenu() {
