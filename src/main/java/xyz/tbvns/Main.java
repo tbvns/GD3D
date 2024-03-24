@@ -14,6 +14,7 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Objects;
@@ -30,6 +31,10 @@ public class Main {
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
             frame.setSize(540, 450);
             frame.setLayout(new FlowLayout(FlowLayout.LEFT, 8, 8));
+            Font font = new Font(Font.DIALOG, Font.BOLD, 11);
+            frame.setFont(font);
+
+            frame.setTitle("GD3D - Open source 3d model importer for Geometry dash");
         } else {
             frame.setSize(530, 425);
         }
@@ -71,6 +76,7 @@ public class Main {
                     } else {
                         about.setSize(350, 365);
                     }
+                    about.setIconImage(jFrame.getIconImage());
                     about.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-about.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-about.getSize().height/2);
                     about.setVisible(true);
                 } catch (Exception err) {
@@ -135,7 +141,13 @@ public class Main {
             SelectOBJ.setText("Select OBJ folder");
             SelectMTL.setText("Select MTL folder");
             jPanel.setPreferredSize(new Dimension(145, 120));
+            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                SelectOBJ.setFont(jFrame.getFont());
+                SelectMTL.setFont(jFrame.getFont());
+                jPanel.setPreferredSize(new Dimension(135, 120));
+            }
         }
+
 
         UseAnimation.addActionListener(new ActionListener() {
             @Override
@@ -233,6 +245,7 @@ public class Main {
             jPanel.setPreferredSize(new Dimension(115, 120));
         }
 
+
         JCheckBox FollowPlayer = new JCheckBox("Follow player", Constant.FollowPlayer);
         JCheckBox UseColor = new JCheckBox("Use color", Constant.UseColor);
         JCheckBox UseKeyframe = new JCheckBox("Keyframe", Constant.UseKeyframe);
@@ -281,6 +294,9 @@ public class Main {
             jPanel.setPreferredSize(new Dimension(125, 120));
             jPanel.add(new JLabel("Has obj folder: " + Constant.HasOBJ));
             jPanel.add(new JLabel("Has mtl folder: " + Constant.HasMTL));
+            if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                jPanel.setPreferredSize(new Dimension(135, 120));
+            }
         }
         jPanel.add(new JLabel("Is gd open: " + Constant.HasGD));
         jPanel.add(new JLabel("Is ready: " + Constant.isReady));
