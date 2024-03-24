@@ -111,9 +111,11 @@
                             <outfile>target/GD3D.exe</outfile>
                             <jar>/home/tbvns/IdeaProjects/GD3D/target/GD3D-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
                             <errTitle>GD3D - Error:</errTitle>
+
                             <jre>
-                                <minVersion>1.8.0</minVersion>
+                                <minVersion>21</minVersion>
                             </jre>
+
                             <versionInfo>
                                 <fileVersion>1.2.3.4</fileVersion>
                                 <txtFileVersion>txt file version?</txtFileVersion>
