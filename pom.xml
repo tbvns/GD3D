@@ -8,6 +8,16 @@
     <artifactId>GD3D</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <organization>
+        <name>Tbvns</name>
+        <url>https://github.com/tbvns</url>
+    </organization>
+
+    <inceptionYear>2023</inceptionYear>
+    <description>A 3d importer for GD</description>
+
+    <name>GD3D</name>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -24,7 +34,6 @@
             <url>https://jitpack.io</url>
         </repository>
     </repositories>
-
 
     <dependencies>
         <dependency>
@@ -81,6 +90,42 @@
                         <goals>
                             <goal>single</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.5.0</version>
+                <executions>
+                    <execution>
+                        <id>l4j-gui</id>
+                        <phase>package</phase>
+                        <goals><goal>launch4j</goal></goals>
+                        <configuration>
+                            <icon>GD3D.ico</icon>
+                            <classPath>
+                                <mainClass>xyz.tbvns.Main</mainClass>
+                            </classPath>
+                            <headerType>gui</headerType>
+                            <outfile>target/GD3D.exe</outfile>
+                            <jar>/home/tbvns/IdeaProjects/GD3D/target/GD3D-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
+                            <errTitle>GD3D - Error:</errTitle>
+                            <jre>
+                                <minVersion>1.8.0</minVersion>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>1.2.3.4</fileVersion>
+                                <txtFileVersion>txt file version?</txtFileVersion>
+                                <fileDescription>a description</fileDescription>
+                                <copyright>my copyright</copyright>
+                                <productVersion>4.3.2.1</productVersion>
+                                <txtProductVersion>txt product version</txtProductVersion>
+                                <productName>GD3D</productName>
+                                <internalName>GD3D</internalName>
+                                <originalFilename>GD3D.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

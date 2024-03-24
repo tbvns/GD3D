@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 21
+Main-Class: xyz.tbvns.Main
+
