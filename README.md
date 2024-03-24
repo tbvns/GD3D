@@ -13,4 +13,4 @@
 Custom texture other than solid color, Light emission and calculation.
 
 ## How to use:
-Have a look at the [wiki](/wiki), there are lot of helpfull information on how to install and use this programe.
+Have a look at the [wiki](https://github.com/tbvns/GD3D/wiki), there are lot of helpfull information on how to install and use this programe.
