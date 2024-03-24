@@ -28,7 +28,8 @@ public class Main {
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-            frame.setSize(540, 425);
+            frame.setSize(540, 450);
+            frame.setLayout(new FlowLayout(FlowLayout.LEFT, 8, 8));
         } else {
             frame.setSize(530, 425);
         }
@@ -65,7 +66,11 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
                 try {
                     JFrame about = About.about();
-                    about.setSize(350, 365);
+                    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                        about.setSize(350, 400);
+                    } else {
+                        about.setSize(350, 365);
+                    }
                     about.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-about.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-about.getSize().height/2);
                     about.setVisible(true);
                 } catch (Exception err) {
