@@ -131,6 +131,10 @@ public class Main {
         jPanel.setLayout(new BoxLayout(jPanel, 1));
         jPanel.setPreferredSize(new Dimension(120, 120));
 
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            jPanel.setPreferredSize(new Dimension(125, 120));
+        }
+
         jPanel.setBorder(BorderFactory.createTitledBorder("File"));
 
         JCheckBox UseAnimation = new JCheckBox("Use animation", Constant.UseAnimation);
@@ -144,7 +148,7 @@ public class Main {
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
                 SelectOBJ.setFont(jFrame.getFont());
                 SelectMTL.setFont(jFrame.getFont());
-                jPanel.setPreferredSize(new Dimension(135, 120));
+                jPanel.setPreferredSize(new Dimension(140, 120));
             }
         }
 
