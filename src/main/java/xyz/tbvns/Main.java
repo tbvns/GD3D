@@ -1,6 +1,7 @@
 package xyz.tbvns;
 
 import xyz.tbvns.Generate.Generate3D;
+import xyz.tbvns.Swing.About;
 import xyz.tbvns.Swing.Camera;
 import xyz.tbvns.Swing.Misc;
 import xyz.tbvns.WebSocket.CheckGDConnection;
@@ -9,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +21,8 @@ import java.util.Objects;
 public class Main {
 
     public static JFrame jFrame;
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException, IOException, BadLocationException {
+
         JFrame frame = new JFrame("GD3D");
         jFrame = frame;
         frame.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
@@ -60,11 +63,14 @@ public class Main {
         about.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new JFrame("Error:");
-                JOptionPane.showMessageDialog(frame,
-                        "Not implemented yet !",
-                        "Error !",
-                        JOptionPane.ERROR_MESSAGE);
+                try {
+                    JFrame about = About.about();
+                    about.setSize(350, 365);
+                    about.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-about.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-about.getSize().height/2);
+                    about.setVisible(true);
+                } catch (Exception err) {
+                    err.printStackTrace();
+                }
             }
         });
 

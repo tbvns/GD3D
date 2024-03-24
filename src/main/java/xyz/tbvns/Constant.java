@@ -37,4 +37,10 @@ public class Constant {
     public static float GameSpeed = 1;
     public static int StartingGroup = 1;
     public static int PlaceDelay = 5;
+
+
+
+
+    //Values
+    public static String version = "B0.0.2";
 }
