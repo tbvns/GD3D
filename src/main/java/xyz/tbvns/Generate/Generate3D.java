@@ -89,6 +89,8 @@ public class Generate3D {
             OBJs = Utils.sort(OBJs);
             MTLs = Utils.sort(MTLs);
 
+            System.out.println(OBJs);
+
             JFrame frame = new JFrame("Warning:");
             JOptionPane.showMessageDialog(frame,
                     "You are using windows,\nGD3D uses experimental code on this platform.",

@@ -108,7 +108,9 @@ public class Utils {
 
         for (int i = 0; i < fileSorted.size(); i++) {
             try {
-                fileReturned.add(fileSorted.get(i));
+                if (fileSorted.get(i) != null) {
+                    fileReturned.add(fileSorted.get(i));
+                }
             } catch (Exception e) {
                 JFrame frame = new JFrame("Warning:");
                 JOptionPane.showMessageDialog(frame,
