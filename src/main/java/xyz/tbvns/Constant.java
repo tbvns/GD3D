@@ -26,10 +26,10 @@ public class Constant {
     public static String yScreenCenter = "120";
     public static String screenPositionX = "0";
     public static String screenPositionY = "0";
-    public static String screenPositionZ = "-20";
+    public static String screenPositionZ = "20";
     public static String viewAngleX = "0";
-    public static String viewAngleY = "180";
-    public static String viewAngleZ = "90";
+    public static String viewAngleY = "0";
+    public static String viewAngleZ = "-90";
     public static String modelScale = "20";
     public static int SkipFrame = 5;
     public static float FPS = 24;
