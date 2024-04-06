@@ -140,6 +140,13 @@ public class Generate3D {
                             if (!colors.contains(f.color)) {
                                 f.colorId = colors.size() + 1;
                                 colors.add(f.color);
+                            } else {
+                                for (int i1 = 0; i1 < colors.size(); i1++) {
+                                    Color color = colors.get(i1);
+                                    if (color == f.color) {
+                                        f.colorId = i1;
+                                    }
+                                }
                             }
 
                             id[0] +=1;
