@@ -6,9 +6,12 @@ import org.locationtech.jts.geom.Polygon;
 import xyz.tbvns.Object.Face;
 import xyz.tbvns.Object.Vector3;
 
+import javax.swing.*;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Utils {
@@ -88,5 +91,33 @@ public class Utils {
         } else {
             return (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1) - 1).z + Constant.points3d.get(face.points.get(2) - 1).z) / 3;
         }
+    }
+
+    public static List<File> sort(List<File> files) {
+        HashMap<Integer, File> fileSorted = new HashMap<>();
+
+        files.forEach(file -> {
+            String name = file.getName();
+            name = name.replaceAll("[^0-9]+", "");
+            System.out.println(name);
+            int id = Integer.parseInt(name);
+            fileSorted.put(id, file);
+        });
+
+        List<File> fileReturned = new ArrayList<>();
+
+        for (int i = 0; i < fileSorted.size(); i++) {
+            try {
+                fileReturned.add(fileSorted.get(i));
+            } catch (Exception e) {
+                JFrame frame = new JFrame("Warning:");
+                JOptionPane.showMessageDialog(frame,
+                        "The frame " + i + " is missing !",
+                        "Warning !",
+                        JOptionPane.WARNING_MESSAGE);
+            }
+        }
+
+        return fileReturned;
     }
 }

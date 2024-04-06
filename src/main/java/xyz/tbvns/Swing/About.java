@@ -23,7 +23,7 @@ public class About {
         jFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
 
         BufferedImage image = ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3Dbanner.png")));
-        Image img = image.getScaledInstance(image.getWidth() / 10, image.getHeight() / 10, 1);
+        Image img = image.getScaledInstance(image.getWidth() / 10, image.getHeight() / 10, Image.SCALE_AREA_AVERAGING);
 
         InputStream inputStream = About.class.getResourceAsStream("/About.html");
         JEditorPane editorPane = new JEditorPane("text/html", new String(inputStream.readAllBytes()));

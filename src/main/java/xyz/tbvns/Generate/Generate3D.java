@@ -7,6 +7,7 @@ import xyz.tbvns.Object.Face;
 import xyz.tbvns.Object.Vector3;
 import xyz.tbvns.Utils;
 
+import javax.swing.*;
 import javax.vecmath.Point3d;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -82,6 +83,17 @@ public class Generate3D {
             if (f.getAbsolutePath().endsWith(".mtl")) {
                 MTLs.add(f);
             }
+        }
+
+        if (System.getProperty("os.name").contains("windows")) {
+            OBJs = Utils.sort(OBJs);
+            MTLs = Utils.sort(MTLs);
+
+            JFrame frame = new JFrame("Warning:");
+            JOptionPane.showMessageDialog(frame,
+                    "You are using windows,\nGD3D uses experimental code on this platform.",
+                    "Warning !",
+                    JOptionPane.WARNING_MESSAGE);
         }
 
         if (Constant.OBJ.isDirectory()) {
