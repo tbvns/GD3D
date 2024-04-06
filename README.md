@@ -1,4 +1,12 @@
-![gd3dbanner](https://github.com/tbvns/GD3D/assets/69420062/4aefb227-30f8-4f62-9de8-dfecd6e8bb21)
+<div align="center"">
+     <img src="https://github.com/tbvns/GD3D/assets/69420062/9faf7df4-8e81-4a47-b685-69de173f4f80" width=700>
+</div>
+
+
+
+
+
+
 
 # GD3D - Open source 3d model importer for Geometry dash
 
