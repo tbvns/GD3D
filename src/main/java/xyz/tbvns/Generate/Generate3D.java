@@ -85,11 +85,9 @@ public class Generate3D {
             }
         }
 
-        if (System.getProperty("os.name").contains("windows")) {
+        if (System.getProperty("os.name").toLowerCase().contains("window")) {
             OBJs = Utils.sort(OBJs);
             MTLs = Utils.sort(MTLs);
-
-            System.out.println(OBJs);
 
             JFrame frame = new JFrame("Warning:");
             JOptionPane.showMessageDialog(frame,

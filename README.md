@@ -21,8 +21,8 @@
 - Faces are not placed in the right order
 - 3D models are upside down
 
-## What it don't/won't do:
+## What it doesn't/won't do:
 Custom texture other than solid color, Light emission and calculation.
 
 ## How to use:
-Have a look at the [wiki](https://github.com/tbvns/GD3D/wiki), there are lot of helpfull information on how to install and use this programe.
+Have a look at the [wiki](https://github.com/tbvns/GD3D/wiki), there are lots of helpfull information on how to install and use this programe.
