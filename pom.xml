@@ -109,7 +109,7 @@
                             </classPath>
                             <headerType>gui</headerType>
                             <outfile>target/GD3D.exe</outfile>
-                            <jar>/home/tbvns/IdeaProjects/GD3D/target/GD3D-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
+                            <jar>./target/GD3D-1.0-SNAPSHOT-jar-with-dependencies.jar</jar>
                             <errTitle>GD3D - Error:</errTitle>
 
                             <jre>
