@@ -19,7 +19,6 @@
 
 ## Know bug/issue:
 - Faces are not placed in the right order
-- 3D models are upside down
 
 ## What it doesn't/won't do:
 Custom texture other than solid color, Light emission and calculation.
