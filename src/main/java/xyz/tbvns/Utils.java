@@ -13,6 +13,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Utils {
     public static int xScreenCenter = 320/2;
@@ -86,11 +88,32 @@ public class Utils {
     }
 
     public static float getZ(Face face) {
-        if (face.Has4Point) {
-            return (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1)  - 1).z + Constant.points3d.get(face.points.get(2) - 1).z + Constant.points3d.get(face.points.get(3) - 1).z) / 4;
-        } else {
-            return (Constant.points3d.get(face.points.get(0) - 1).z + Constant.points3d.get(face.points.get(1) - 1).z + Constant.points3d.get(face.points.get(2) - 1).z) / 3;
-        }
+        //d = √[(x2 − x1)2 + (y2 − y1)2 + (z2 − z1)2]
+        List<Vector3> points = new ArrayList<>();
+        face.points.forEach(p -> {
+            Vector3 point = Constant.points3d.get(p - 1);
+            points.add(point);
+        });
+
+        List<Double> dist = new ArrayList<>();
+
+        points.forEach(p -> {
+            dist.add(Math.sqrt(
+                    (Math.pow((p.x - screenPosition.x), 2)) +
+                    (Math.pow((p.y - screenPosition.y), 2)) +
+                    (Math.pow((p.z - screenPosition.z), 2)))
+            );
+        });
+
+        AtomicLong average = new AtomicLong();
+
+        dist.forEach(d -> {
+            average.setPlain((long) (average.getPlain() + d));
+        });
+
+        average.setPlain(average.getPlain() / dist.size());
+
+        return -average.get();
     }
 
     public static List<File> sort(List<File> files) {
