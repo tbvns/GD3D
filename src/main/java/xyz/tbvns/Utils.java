@@ -122,7 +122,6 @@ public class Utils {
         files.forEach(file -> {
             String name = file.getName();
             name = name.replaceAll("[^0-9]+", "");
-            System.out.println(name);
             int id = Integer.parseInt(name);
             fileSorted.put(id, file);
         });
