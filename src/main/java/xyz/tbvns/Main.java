@@ -15,7 +15,6 @@ import javax.swing.text.BadLocationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Objects;
@@ -46,8 +45,10 @@ public class Main {
         frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResourceAsStream("/GD3D.png"))));
 
         JMenuBar bar = new JMenuBar();
-        bar.add(HelpMenu());
+
         bar.add(new Tools().menu());
+        bar.add(HelpMenu());
+        bar.add(CreditsMenu());
 
 
         frame.setJMenuBar(bar);
@@ -64,67 +65,73 @@ public class Main {
     public static JMenu HelpMenu() {
         JMenu menu = new JMenu("Help");
 
+        JMenuItem help = new JMenuItem("Wiki");
+        JMenuItem issues = new JMenuItem("Issues");
+
+        help.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/wiki"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        issues.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/issues"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        menu.add(help);
+        menu.add(issues);
+
+        return menu;
+    }
+
+    public static JMenu CreditsMenu() {
+        JMenu menu = new JMenu("Credits");
+
         JMenuItem about = new JMenuItem("About");
-        JMenuItem help = new JMenuItem("Help");
         JMenuItem GitHub = new JMenuItem("Github");
         JMenuItem contributor = new JMenuItem("Contributor");
 
-        about.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    JFrame about = About.about();
-                    if (System.getProperty("os.name").toLowerCase().contains("windows")) {
-                        about.setSize(350, 400);
-                    } else {
-                        about.setSize(350, 365);
-                    }
-                    about.setIconImage(jFrame.getIconImage());
-                    about.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2-about.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2-about.getSize().height/2);
-                    about.setVisible(true);
-                } catch (Exception err) {
-                    err.printStackTrace();
+        about.addActionListener(e -> {
+            try {
+                JFrame about1 = About.about();
+                if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+                    about1.setSize(350, 400);
+                } else {
+                    about1.setSize(350, 365);
                 }
+                about1.setIconImage(jFrame.getIconImage());
+                about1.setLocation(Toolkit.getDefaultToolkit().getScreenSize().width/2- about1.getSize().width/2, Toolkit.getDefaultToolkit().getScreenSize().height/2- about1.getSize().height/2);
+                about1.setVisible(true);
+            } catch (Exception err) {
+                err.printStackTrace();
             }
         });
 
-        help.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/wiki"));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        GitHub.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
-        GitHub.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/"));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+        contributor.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/graphs/contributors"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
 
-        contributor.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(URI.create("https://github.com/tbvns/GD3D/graphs/contributors"));
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-
-        menu.add(about);
-        menu.add(help);
         menu.add(GitHub);
         menu.add(contributor);
+        menu.add(about);
 
         return menu;
     }
