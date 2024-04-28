@@ -75,7 +75,7 @@ public class Misc {
         Optimisation.add(OptimizeGradient);
         Optimisation.add(new JLabel(" "));
 
-        Other.add(new JLabel("Place delay (ns)"));
+        Other.add(new JLabel("Place delay (ms)"));
 
         Delay.setPreferredSize(new Dimension(30, 20));
         Other.add(Delay);

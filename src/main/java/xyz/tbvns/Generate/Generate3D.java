@@ -151,9 +151,9 @@ public class Generate3D {
 
                             id[0] +=1;
                             if (f.points.size() == 3) {
-                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], Math.round(Utils.getZ(f) * 100), f.colorId);
+                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(2), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
                             } else {
-                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], Math.round(Utils.getZ(f) * 100), f.colorId);
+                                GDObject.addGradient((temp.get()*(1/Constant.FPS*Constant.GameSpeed)*30), 100f, 0, f.points.get(0), f.points.get(1), f.points.get(2), f.points.get(3), id[0], -Math.round(Utils.getZ(f) * 10000), f.colorId);
                             }
                         });
 

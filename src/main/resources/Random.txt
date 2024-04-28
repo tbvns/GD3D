@@ -5,7 +5,5 @@ Double speed: 12.91667
 Triple speed: 15.667
 Quadruple speed: 19.2
 
-TODO: fix the skip frame system
-TODO: fix the rotation system
 TODO: Add the code for the color optimisation feature
 TODO: Add the code for the gradient optimisation feature

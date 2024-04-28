@@ -4,6 +4,7 @@ import xyz.tbvns.Generate.Generate3D;
 import xyz.tbvns.Swing.About;
 import xyz.tbvns.Swing.Camera;
 import xyz.tbvns.Swing.Misc;
+import xyz.tbvns.Swing.Tools;
 import xyz.tbvns.WebSocket.CheckGDConnection;
 
 import javax.imageio.ImageIO;
@@ -46,6 +47,8 @@ public class Main {
 
         JMenuBar bar = new JMenuBar();
         bar.add(HelpMenu());
+        bar.add(new Tools().menu());
+
 
         frame.setJMenuBar(bar);
 

@@ -84,7 +84,7 @@ public class GDObject {
     public static void send() {
         new WSClient(URI.create("ws://127.0.0.1:1313"), request).run();
         try {
-            Thread.sleep(0, Constant.PlaceDelay);
+            Thread.sleep(Constant.PlaceDelay);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

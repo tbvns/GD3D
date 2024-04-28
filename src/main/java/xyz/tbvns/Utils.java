@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Utils {
     public static int xScreenCenter = 320/2;
@@ -29,8 +30,7 @@ public class Utils {
     double CP = Math.cos( DEG_TO_RAD * viewAngle.y );
     double SP = Math.sin( DEG_TO_RAD * viewAngle.y );
 
-    public void projectPoint(Point3d input, Point3d output)
-    {
+    public void projectPoint(Point3d input, Point3d output) {
         double x = screenPosition.x + input.x * CT - input.y * ST;
         double y = screenPosition.y + input.x * ST * SP + input.y * CT * SP
                 + input.z * CP;
@@ -88,6 +88,7 @@ public class Utils {
     }
 
     public static float getZ(Face face) {
+        //TODO: FIX THIS SHIT ITS BROKEN AF PLS HELP ME I THINK I AM GOING TO COMMIT SUICIDE
         //d = √[(x2 − x1)2 + (y2 − y1)2 + (z2 − z1)2]
         List<Vector3> points = new ArrayList<>();
         face.points.forEach(p -> {
@@ -105,15 +106,18 @@ public class Utils {
             );
         });
 
-        AtomicLong average = new AtomicLong();
+        AtomicReference<Float> average = new AtomicReference<Float>(0f);
 
         dist.forEach(d -> {
-            average.setPlain((long) (average.getPlain() + d));
+            average.set((float) (average.get() + d));
         });
 
-        average.setPlain(average.getPlain() / dist.size());
+        System.out.println(average);
+        average.set(average.get() / dist.size());
+        System.out.println(dist);
+        System.out.println(average);
 
-        return -average.get();
+        return average.get();
     }
 
     public static List<File> sort(List<File> files) {

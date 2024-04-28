@@ -47,6 +47,12 @@
             <artifactId>vecmath</artifactId>
             <version>1.5.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.joml</groupId>
+            <artifactId>joml</artifactId>
+            <version>1.10.5</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.locationtech.jts.io/jts-io-common -->
         <dependency>
             <groupId>org.locationtech.jts.io</groupId>
