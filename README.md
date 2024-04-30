@@ -8,7 +8,7 @@
 
 
 
-# GD3D - Open source 3d model importer for Geometry dash
+# GD3D - Open source 3d model importer for GeometryDash
 
 > This programe allow you to import 3D models in Geometry dash. It support OBJ files and MTL files, even in sequence to support animation.
 
