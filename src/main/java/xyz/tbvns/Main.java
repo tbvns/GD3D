@@ -67,6 +67,7 @@ public class Main {
 
         JMenuItem help = new JMenuItem("Wiki");
         JMenuItem issues = new JMenuItem("Issues");
+        JMenuItem discord = new JMenuItem("Discord");
 
         help.addActionListener(e -> {
             try {
@@ -84,8 +85,17 @@ public class Main {
             }
         });
 
+        discord.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://discord.gg/SYtmsjSMu6"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
         menu.add(help);
         menu.add(issues);
+        menu.add(discord);
 
         return menu;
     }
@@ -95,6 +105,7 @@ public class Main {
 
         JMenuItem about = new JMenuItem("About");
         JMenuItem GitHub = new JMenuItem("Github");
+        JMenuItem Discord = new JMenuItem("Discord");
         JMenuItem contributor = new JMenuItem("Contributor");
 
         about.addActionListener(e -> {
@@ -129,7 +140,16 @@ public class Main {
             }
         });
 
+        Discord.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(URI.create("https://discord.gg/SYtmsjSMu6"));
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
         menu.add(GitHub);
+        menu.add(Discord);
         menu.add(contributor);
         menu.add(about);
 
