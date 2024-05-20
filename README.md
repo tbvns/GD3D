@@ -1,3 +1,6 @@
+# THIS PROJECT IS A UNDER HUGE REWRITE
+> Sorry for the time this will take, there will be no update for a while.
+
 <div align="center"">
      <img src="https://github.com/tbvns/GD3D/assets/69420062/9faf7df4-8e81-4a47-b685-69de173f4f80" width=600>
 </div>
